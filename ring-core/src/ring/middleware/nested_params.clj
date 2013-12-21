@@ -25,7 +25,10 @@
       (let [[j & js] ks]
         (if (= j "")
           (assoc-vec m k (assoc-nested {} js v))
-          (assoc m k (assoc-nested (get m k {}) ks v))))
+          (let [value-in-map-for-k (get m k {})]
+            (if (map? value-in-map-for-k)
+              (assoc m k (assoc-nested value-in-map-for-k ks v))
+              (assoc m k (assoc-nested {} ks v)))))) ;; throw away old value
       (assoc-conj m k v))
     v))
 

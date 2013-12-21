@@ -16,7 +16,7 @@
         {"foo[]" "bar"}         {"foo" ["bar"]}
         {"foo[]" ["bar" "baz"]} {"foo" ["bar" "baz"]}
         {"a[x][]" ["b"], "a[x][][y]" "c"} {"a" {"x" ["b" {"y" "c"}]}}
-        {"foo" "bar" "foo[bar]" "baz"} {"foo" {"bar" ["baz"]}})
+        {"foo" "bar" "foo[bar]" "baz"} {"foo" {"bar" "baz"}})
       (let [params (handler {:params {"a[][x]" "c", "a[][y]" "d"}})]
         (is (= (keys params) ["a"]))
         (is (= (set (params "a")) #{{"x" "c"} {"y" "d"}}))))
